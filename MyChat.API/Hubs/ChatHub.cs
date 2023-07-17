@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace SignalRChatRoomApp.Hubs
+namespace MyChat.API.Hubs
 {
     public class ChatHub : Hub
     {
@@ -11,7 +11,8 @@ namespace SignalRChatRoomApp.Hubs
         }
         public async Task JoinRoom(UserConnection userConnection)
         {
-            await Clients.All.SendAsync("ReceieveMessage", "Hey everyone");
+            await Groups.AddToGroupAsync(Context.ConnectionId, userConnection.Room);
+            await Clients.Group(userConnection.Room).SendAsync("ReceieveMessage", _botUser, $"{userConnection.User} has joined {userConnection.Room}");
         }
     }
 }

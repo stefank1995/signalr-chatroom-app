@@ -1,4 +1,4 @@
-﻿namespace SignalRChatRoomApp
+﻿namespace MyChat.API
 {
     public class UserConnection
     {
